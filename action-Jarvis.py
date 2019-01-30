@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import ConfigParser
+import configparser
 from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
 import io
@@ -9,7 +9,7 @@ import io
 CONFIGURATION_ENCODING_FORMAT = "utf-8"
 CONFIG_INI = "config.ini"
 
-class SnipsConfigParser(ConfigParser.SafeConfigParser):
+class SnipsConfigParser(configparser.SafeConfigParser):
 	def to_dict(self):
 		return {section : {option_name : option for option_name, option in self.items(section)} for section in self.sections()}
 
@@ -28,8 +28,10 @@ def subscribe_intent_callback(hermes, intentMessage):
 
 
 def action_wrapper(hermes, intentMessage, conf):
+	current_session_id = intentMessage.session_id
 	hermes.publish_end_session(current_session_id, "I'm Jarvis! Just A Rather Very Intelligent System!")
 
 if __name__ == "__main__":
+	conf = read_configuration_file(CONFIG_INI)
 	with Hermes(conf['secret']['mqtt_host']+":"+conf['secret']['mqtt_port']) as h:
 		h.subscribe_intent("kajdocsi:Jarvis", subscribe_intent_callback).start()
