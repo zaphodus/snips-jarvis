@@ -30,53 +30,53 @@ def subscribe_intent_callback(hermes, intentMessage):
 
 def action_wrapper(hermes, intentMessage, conf):
 	current_session_id = intentMessage.session_id
+	result_sentence = "It is wibbily wobbly timey wimey"
 	if intentMessage.slots.Question
     if intentMessage.slots.PartsOfTheTay or intentMessage.slots.TimeOfDay:
-    h = time.hour
-    result_sentence = "It is wibbily wobbly timey wimey"
-    if h < 4:
-      result_sentence = "It is quarter very early"
-    elif h < 5:
-      result_sentence = "It is half past very early"
-    elif h < 6:
-      result_sentence = "It is quarter to very early"
-    elif h < 7:
-      result_sentence = "It is very early"
-    elif h < 8:
-      result_sentence = "It is breakfast time"
-    elif h < 9:
-      result_sentence = "It is morning"
-    elif h < 10:
-      result_sentence = "It is snack time"
-    elif h < 11:
-      result_sentence = "It is morning"
-    elif h < 12:
-      result_sentence = "It is lunch time"
-    elif h < 13:
-      result_sentence = "It is afternoon"
-    elif h < 14:
-      result_sentence = "It is afternoon"
-    elif h < 15:
-      result_sentence = "It is snack time"
-    elif h < 16:
-      result_sentence = "It is afternoon"
-    elif h < 17:
-      result_sentence = "It is afternoon"
-    elif h < 18:
-      result_sentence = "It is afternoon"
-    elif h < 19:
-      result_sentence = "It is dinner time"
-    elif h < 20:
-      result_sentence = "It is evening"
-    elif h < 21:
-      result_sentence = "It is quarter very late"
-    elif h < 22:
-      result_sentence = "It is half past very late"
-    elif h < 23:    
-      result_sentence = "It isquarter to very late"
-    elif h < 24:
-      result_sentence = "It is very late"
-		hermes.publish_end_session(current_session_id, result_sentence)
+			h = time.hour
+			if h < 4:
+				result_sentence = "It is quarter very early"
+			elif h < 5:
+				result_sentence = "It is half past very early"
+			elif h < 6:
+				result_sentence = "It is quarter to very early"
+			elif h < 7:
+				result_sentence = "It is very early"
+			elif h < 8:
+				result_sentence = "It is breakfast time"
+			elif h < 9:
+				result_sentence = "It is morning"
+			elif h < 10:
+				result_sentence = "It is snack time"
+			elif h < 11:
+				result_sentence = "It is morning"
+			elif h < 12:
+				result_sentence = "It is lunch time"
+			elif h < 13:
+				result_sentence = "It is afternoon"
+			elif h < 14:
+				result_sentence = "It is afternoon"
+			elif h < 15:
+				result_sentence = "It is snack time"
+			elif h < 16:
+				result_sentence = "It is afternoon"
+			elif h < 17:
+				result_sentence = "It is afternoon"
+			elif h < 18:
+				result_sentence = "It is afternoon"
+			elif h < 19:
+				result_sentence = "It is dinner time"
+			elif h < 20:
+				result_sentence = "It is evening"
+			elif h < 21:
+				result_sentence = "It is quarter very late"
+			elif h < 22:
+				result_sentence = "It is half past very late"
+			elif h < 23:    
+				result_sentence = "It isquarter to very late"
+			elif h < 24:
+				result_sentence = "It is very late"
+	hermes.publish_end_session(current_session_id, result_sentence)
 
 if __name__ == "__main__":
 	conf = read_configuration_file(CONFIG_INI)
