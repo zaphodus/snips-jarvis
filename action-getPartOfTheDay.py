@@ -5,7 +5,7 @@ import configparser
 from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
 import io
-from datetime import time
+from datetime import datetime
 
 CONFIGURATION_ENCODING_FORMAT = "utf-8"
 CONFIG_INI = "config.ini"
@@ -31,8 +31,9 @@ def action_wrapper(hermes, intentMessage, conf):
 	current_session_id = intentMessage.session_id
 	result_sentence = "It is wibbily wobbly timey wimey"
 	if intentMessage.slots.Question:
-		if intentMessage.slots.PartsOfTheTay or intentMessage.slots.TimeOfDay:
-			h = time.hour
+		if intentMessage.slots.PartsOfTheDay or intentMessage.slots.TimeOfDay:
+			now = datetime.now()
+			h = now.hour
 			if h < 4:
 				result_sentence = "It is quarter very early"
 			elif h < 5:
