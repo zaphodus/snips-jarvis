@@ -31,7 +31,7 @@ def action_wrapper(hermes, intentMessage, conf):
 	current_session_id = intentMessage.session_id
 	result_sentence = ""
 	if intentMessage.slots.Question:
-		if intentMessage.slots.Day or intentMessage.slots.NextPrevDay or intentMessage.slots.DayOfTheWeek:
+		if intentMessage.slots.Day:
 			if intentMessage.slots.NextPrevDay:
 				if intentMessage.slots.NextPrevDay.first().value == "yesterday":
 					d = datetime.now() - timedelta(days=1)
