@@ -41,7 +41,7 @@ def action_wrapper(hermes, intentMessage, conf):
 			elif intentMessage.slots.NextPrevDay.first().value == "tomorrow":
 				d = datetime.now() + timedelta(days=1)
 				result_sentence = d.strftime("Tomorrow will be %A")
-		elif intentMessage.slots.Day or intentMessage.slots.DayOfTheWeek:
+		elif intentMessage.slots.Day:
 			d = datetime.now()
 			result_sentence = d.strftime("It's %A")
 	hermes.publish_end_session(current_session_id, result_sentence)
