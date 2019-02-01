@@ -30,9 +30,10 @@ def subscribe_intent_callback(hermes, intentMessage):
 
 def action_wrapper(hermes, intentMessage, conf):
 	current_session_id = intentMessage.session_id
-	now = datetime.now()
-	result_sentence = now.strftime("It is %H:%M")
-	hermes.publish_end_session(current_session_id, result_sentence)
+	if intentMessage.slots.Time or intentMessage.slots.PartsOfTheTay:
+		now = datetime.now()
+		result_sentence = now.strftime("It is %H:%M")
+		hermes.publish_end_session(current_session_id, result_sentence)
 
 if __name__ == "__main__":
 	conf = read_configuration_file(CONFIG_INI)
