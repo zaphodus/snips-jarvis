@@ -27,12 +27,11 @@ def subscribe_intent_callback(hermes, intentMessage):
 	conf = read_configuration_file(CONFIG_INI)
 	action_wrapper(hermes, intentMessage, conf)
 
-
 def action_wrapper(hermes, intentMessage, conf):
 	current_session_id = intentMessage.session_id
 	result_sentence = "It is wibbily wobbly timey wimey"
 	if intentMessage.slots.Question
-    if intentMessage.slots.PartsOfTheTay or intentMessage.slots.TimeOfDay:
+		if intentMessage.slots.PartsOfTheTay or intentMessage.slots.TimeOfDay:
 			h = time.hour
 			if h < 4:
 				result_sentence = "It is quarter very early"
@@ -72,7 +71,7 @@ def action_wrapper(hermes, intentMessage, conf):
 				result_sentence = "It is quarter very late"
 			elif h < 22:
 				result_sentence = "It is half past very late"
-			elif h < 23:    
+			elif h < 23:
 				result_sentence = "It isquarter to very late"
 			elif h < 24:
 				result_sentence = "It is very late"
@@ -82,4 +81,3 @@ if __name__ == "__main__":
 	conf = read_configuration_file(CONFIG_INI)
 	with Hermes(conf['secret']['mqtt_host']+":"+conf['secret']['mqtt_port']) as h:
 		h.subscribe_intent("kajdocsi:getPartOfTheDay", subscribe_intent_callback).start()
-

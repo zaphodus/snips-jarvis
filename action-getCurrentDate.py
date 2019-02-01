@@ -27,13 +27,14 @@ def subscribe_intent_callback(hermes, intentMessage):
 	conf = read_configuration_file(CONFIG_INI)
 	action_wrapper(hermes, intentMessage, conf)
 
-
 def action_wrapper(hermes, intentMessage, conf):
 	current_session_id = intentMessage.session_id
-	if intentMessage.slots.Date:
-		now = datetime.now()
-		result_sentence = now.strftime("Today is %e. %B")
-		hermes.publish_end_session(current_session_id, result_sentence)
+  result_sentence = ""
+  if intentMessage.slots.Question
+		if intentMessage.slots.Date:
+			now = datetime.now()
+			result_sentence = now.strftime("Today is %e. %B")
+	hermes.publish_end_session(current_session_id, result_sentence)
 
 if __name__ == "__main__":
 	conf = read_configuration_file(CONFIG_INI)
