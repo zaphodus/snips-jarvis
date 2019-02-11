@@ -16,7 +16,8 @@ fi
 
 . $VENV/bin/activate
 
-pip install --upgrade -r requirements.txt
+pip install --upgrade pip
+pip install -r requirements.txt
 
 chmod 755 action-Jarvis.py
 
