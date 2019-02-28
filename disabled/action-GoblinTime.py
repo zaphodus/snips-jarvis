@@ -81,4 +81,4 @@ def action_wrapper(hermes, intentMessage, conf):
 if __name__ == "__main__":
 	conf = read_configuration_file(CONFIG_INI)
 	with Hermes(conf['secret']['mqtt_host']+":"+conf['secret']['mqtt_port']) as h:
-		h.subscribe_intent("kajdocsi:GoblinTime", subscribe_intent_callback).start()
+		h.subscribe_intent("kajdocsi:GoblinTime.d", subscribe_intent_callback).start()

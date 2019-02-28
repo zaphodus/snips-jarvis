@@ -31,23 +31,22 @@ def action_wrapper(hermes, intentMessage, conf):
 	current_session_id = intentMessage.session_id
 	result_sentence = ""
 	if intentMessage.slots.Question:
-		if intentMessage.slots.Date:
-			if intentMessage.slots.NextPrevDay:
-				if intentMessage.slots.NextPrevDay.first().value == "yesterday":
-					now = datetime.now() - timedelta(days=1)
-					result_sentence = now.strftime("Yesterday was %e. %B")
-				elif intentMessage.slots.NextPrevDay.first().value == "today":
-					now = datetime.now()
-					result_sentence = now.strftime("Today is %e. %B")
-				elif intentMessage.slots.NextPrevDay.first().value == "tomorrow":
-					now = datetime.now() + timedelta(days=1)
-					result_sentence = now.strftime("Tomorrow will be %e. %B")
-			else:
-				now = datetime.now()
-				result_sentence = now.strftime("Today is %e. %B")
+		if intentMessage.slots.NextPrevDay:
+			if intentMessage.slots.NextPrevDay.first().value == "yesterday":
+				d = datetime.now() - timedelta(days=1)
+				result_sentence = d.strftime("Yesterday was %A")
+			elif intentMessage.slots.NextPrevDay.first().value == "today":
+				d = datetime.now()
+				result_sentence = d.strftime("It's %A")
+			elif intentMessage.slots.NextPrevDay.first().value == "tomorrow":
+				d = datetime.now() + timedelta(days=1)
+				result_sentence = d.strftime("Tomorrow will be %A")
+		elif intentMessage.slots.Day:
+			d = datetime.now()
+			result_sentence = d.strftime("It's %A")
 	hermes.publish_end_session(current_session_id, result_sentence)
 
 if __name__ == "__main__":
 	conf = read_configuration_file(CONFIG_INI)
 	with Hermes(conf['secret']['mqtt_host']+":"+conf['secret']['mqtt_port']) as h:
-		h.subscribe_intent("kajdocsi:Date", subscribe_intent_callback).start()
+		h.subscribe_intent("kajdocsi:Day.d", subscribe_intent_callback).start()
