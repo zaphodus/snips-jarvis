@@ -3,8 +3,10 @@
 
 import configparser
 from hermes_python.hermes import Hermes
+from hermes_python.ffi.utils import MqttOptions
 from hermes_python.ontology import *
 import io
+import sys
 from datetime import datetime, timedelta
 
 CONFIGURATION_ENCODING_FORMAT = "utf-8"
@@ -20,12 +22,12 @@ def read_configuration_file(configuration_file):
 			conf_parser = SnipsConfigParser()
 			conf_parser.readfp(f)
 			return conf_parser.to_dict()
-	except (IOError, ConfigParser.Error) as e:
+	except:
 		return dict()
 
 def subscribe_intent_callback(hermes, intentMessage):
-	conf = read_configuration_file(CONFIG_INI)
-	action_wrapper(hermes, intentMessage, conf)
+    conf = read_configuration_file(CONFIG_INI)
+    action_wrapper(hermes, intentMessage, conf)
 
 def action_wrapper(hermes, intentMessage, conf):
 	current_session_id = intentMessage.session_id
@@ -48,5 +50,12 @@ def action_wrapper(hermes, intentMessage, conf):
 
 if __name__ == "__main__":
 	conf = read_configuration_file(CONFIG_INI)
-	with Hermes(conf['secret']['mqtt_host']+":"+conf['secret']['mqtt_port']) as h:
-		h.subscribe_intent("kajdocsi:Day.d", subscribe_intent_callback).start()
+	mqtt_opts = MqttOptions(
+		#username=conf["secret"]["mqtt_username"], 
+		#password=conf["secret"]["mqtt_password"],
+		#tls_hostname=conf["secret"]["mqtt_host"],
+		broker_address=conf["secret"]["mqtt_host"]+":"+conf["secret"]["mqtt_port"]
+	)
+	with Hermes(mqtt_options=mqtt_opts) as h:
+		h.subscribe_intent("kajdocsi:Time", subscribe_intent_callback).start()
+
