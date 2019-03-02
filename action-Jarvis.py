@@ -36,8 +36,8 @@ def action_wrapper(hermes, intentMessage, conf):
 if __name__ == "__main__":
 	conf = read_configuration_file(CONFIG_INI)
 	mqtt_opts = MqttOptions(
-	#	username=conf["secret"]["mqtt_username"], 
-	#	password=username=conf["secret"]["mqtt_password"],
+		username=conf["secret"]["mqtt_username"], 
+		password=username=conf["secret"]["mqtt_password"],
 		broker_address=conf["secret"]["mqtt_host"]+":"+conf["secret"]["mqtt_port"]
 	)
 	with Hermes(mqtt_options=mqtt_opts) as h:
