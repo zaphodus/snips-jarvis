@@ -38,7 +38,7 @@ if __name__ == "__main__":
 	mqtt_opts = MqttOptions(
 		#username=conf["secret"]["mqtt_username"],
 		#password=conf["secret"]["mqtt_password"],
-		tls_hostname=conf["secret"]["mqtt_host"],
+		#tls_hostname=conf["secret"]["mqtt_host"],
 		broker_address=conf["secret"]["mqtt_host"]+":"+conf["secret"]["mqtt_port"]
 	)
 	with Hermes(mqtt_options=mqtt_opts) as h:
