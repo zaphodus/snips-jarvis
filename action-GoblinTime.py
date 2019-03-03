@@ -89,5 +89,5 @@ if __name__ == "__main__":
 		broker_address=conf["secret"]["mqtt_host"]+":"+conf["secret"]["mqtt_port"]
 	)
 	with Hermes(mqtt_options=mqtt_opts) as h:
-		h.subscribe_intent("kajdocsi:Time", subscribe_intent_callback).start()
+		h.subscribe_intent("kajdocsi:GoblinTime", subscribe_intent_callback).start()
 
