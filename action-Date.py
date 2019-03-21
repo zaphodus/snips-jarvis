@@ -31,7 +31,7 @@ def subscribe_intent_callback(hermes, intentMessage):
 
 def action_wrapper(hermes, intentMessage, conf):
 	current_session_id = intentMessage.session_id
-	result_sentence = ""
+	result_sentence = "It is wibbily wobbly timey wimey"
 	if intentMessage.slots.Question:
 		if intentMessage.slots.Date:
 			if intentMessage.slots.NextPrevDay:
